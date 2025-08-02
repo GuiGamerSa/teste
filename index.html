@@ -144,21 +144,22 @@
         title: "📋 Novo Relatório de Consulta",
         color: 0x00ff00,
         fields: [
-          { name: "👨‍⚕️ Nome Médico", value: `<@${discordUserId}>`, inline: true },
+          // Médica e ID - lado a lado
+          { name: "👨‍⚕️ Médico", value: `<@${discordUserId}>`, inline: true },
           { name: "🆔 ID Médico", value: idMedico, inline: true },
-
-          
-          // Separador visual (campo em branco)
-          { name: "\u200B", value: "\u200B" },
-          
+    
+          // Separador (linha em branco)
+          { name: "\u200B", value: "\u200B", inline: false },
+    
+          // Paciente e ID - lado a lado
           { name: "👤 Nome Paciente", value: nomePaciente, inline: true },
           { name: "🆔 ID Paciente", value: idPaciente, inline: true },
+    
+          // Sintomas e Medicamentos
           { name: "🤒 Sintomas", value: sintomas, inline: false },
           { name: "💊 Medicamentos", value: medicamentos, inline: false },
-
-          // Separador visual (campo em branco)
-          { name: "\u200B", value: "\u200B" },
-          
+    
+          // Horário e Dia - lado a lado
           { name: "🕒 Horário", value: horario, inline: true },
           { name: "📅 Dia", value: dia, inline: true }
         ],
