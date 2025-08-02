@@ -1,148 +1,123 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sistema Informático da UPA</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <style>
-    body {
-      padding: 2rem;
-      background-color: #f8f9fa;
-    }
-    iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-      margin-top: 2rem;
-    }
-  </style>
 </head>
-<body>
+<body class="bg-light">
 
-  <div class="container text-center">
-    <h1 class="mb-4">👋 Bem-vindo ao Sistema Informático da UPA</h1>
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h1 class="h3">👨‍⚕️ Bem-vindo ao Sistema Informático da UPA</h1>
+      <div>
+        <button id="loginBtn" class="btn btn-primary">Login com Discord</button>
+        <button id="logoutBtn" class="btn btn-danger d-none">Logout</button>
+      </div>
+    </div>
 
-    <div id="userInfo" class="mb-4"></div>
+    <div id="mainContent">
+      <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTrlfALkd8jZi9UFb_qSFIwRmCLcD-SK7E-Vwp2_ws2-ZnhUl8qxcpOPdXf6wgpoZwOdjCI2cpZbMg1/pubhtml?gid=1539016408&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="500" style="border:1px solid #ccc;"></iframe>
+    </div>
 
-    <button id="loginBtn" class="btn btn-primary">Login com Discord</button>
-    <button id="registerBtn" class="btn btn-success d-none" data-bs-toggle="modal" data-bs-target="#relatorioModal">Registrar Relatório de Consulta</button>
-    <button id="logoutBtn" class="btn btn-danger d-none">Logout</button>
+    <div id="formContainer" class="card mt-4 d-none">
+      <div class="card-body">
+        <h5 class="card-title mb-3">📋 Registrar Relatório de Consulta</h5>
+        <form id="relatorioForm">
+          <input type="hidden" id="nomeMedico">
 
-    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTrlfALkd8jZi9UFb_qSFIwRmCLcD-SK7E-Vwp2_ws2-ZnhUl8qxcpOPdXf6wgpoZwOdjCI2cpZbMg1/pubhtml?gid=1539016408&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
-  </div>
+          <div class="mb-2">
+            <label class="form-label">ID Médico</label>
+            <input type="text" class="form-control" id="medicoId" required>
+          </div>
 
-  <!-- Modal para Relatório -->
-  <div class="modal fade" id="relatorioModal" tabindex="-1" aria-labelledby="relatorioModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content text-start">
-        <div class="modal-header">
-          <h5 class="modal-title" id="relatorioModalLabel">Registrar Relatório</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <form id="relatorioForm">
-            <input type="hidden" id="medicoId">
-            <div class="mb-2">
-              <label class="form-label">Nome Médico</label>
-              <input type="text" class="form-control" id="nomeMedico" readonly>
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Nome Paciente</label>
-              <input type="text" class="form-control" id="nomePaciente" required>
-            </div>
-            <div class="mb-2">
-              <label class="form-label">ID Paciente</label>
-              <input type="number" class="form-control" id="idPaciente" required>
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Sintomas</label>
-              <textarea class="form-control" id="sintomas" required></textarea>
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Medicamentos</label>
-              <textarea class="form-control" id="medicamentos" required></textarea>
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Horário</label>
-              <input type="time" class="form-control" id="horario" required>
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Dia</label>
-              <input type="date" class="form-control" id="dia" required>
-            </div>
-            <button type="submit" class="btn btn-success w-100 mt-3">Enviar Relatório</button>
-          </form>
-        </div>
+          <div class="mb-2">
+            <label class="form-label">Nome Paciente</label>
+            <input type="text" class="form-control" id="nomePaciente" required>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">ID Paciente</label>
+            <input type="number" class="form-control" id="idPaciente" required>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Sintomas</label>
+            <textarea class="form-control" id="sintomas" required></textarea>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Medicamentos</label>
+            <textarea class="form-control" id="medicamentos" required></textarea>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Horário</label>
+            <input type="time" class="form-control" id="horario" required>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label">Dia</label>
+            <input type="date" class="form-control" id="dia" required>
+          </div>
+
+          <button type="submit" class="btn btn-success w-100 mt-3">Enviar Relatório</button>
+        </form>
       </div>
     </div>
   </div>
 
-  <!-- Scripts Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
   <script>
-    const CLIENT_ID = "1401008725824770088";
-    const REDIRECT_URI = "https://guigamersa.github.io/teste/";
-    const SCOPE = "identify";
-    const DISCORD_API = "https://discord.com/api/users/@me";
-    const WEBHOOK_URL = "https://discord.com/api/webhooks/1401004679005081672/5n0r7NEXpMnmYfTLtJWKH0j3RhPHxHzxXbkxlDlfoQXbFopCQUkE_bPO6plocDLZO75F";
+    const clientId = '1401008725824770088';
+    const redirectUri = window.location.origin + window.location.pathname;
+    const webhookURL = 'https://discord.com/api/webhooks/1401004679005081672/5n0r7NEXpMnmYfTLtJWKH0j3RhPHxHzxXbkxlDlfoQXbFopCQUkE_bPO6plocDLZO75F';
 
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const registerBtn = document.getElementById("registerBtn");
-    const userInfo = document.getElementById("userInfo");
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      const url = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=token&scope=identify`;
+      window.location.href = url;
+    });
 
-    const getAccessToken = () => {
-      const hash = window.location.hash;
-      if (!hash) return null;
-      return new URLSearchParams(hash.slice(1)).get("access_token");
-    };
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("discord_token");
+      location.reload();
+    });
 
-    const fetchDiscordUser = async (token) => {
-      const res = await fetch(DISCORD_API, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (!res.ok) throw new Error("Falha ao obter dados do Discord");
-      return await res.json();
-    };
+    function init() {
+      const token = localStorage.getItem("discord_token");
+      if (token) {
+        fetch("https://discord.com/api/users/@me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(res => res.json())
+        .then(user => {
+          document.getElementById("loginBtn").classList.add("d-none");
+          document.getElementById("logoutBtn").classList.remove("d-none");
+          document.getElementById("formContainer").classList.remove("d-none");
+          document.getElementById("mainContent").classList.add("d-none");
 
-    const init = async () => {
-      const token = getAccessToken();
-      if (!token) return;
-
-      window.history.replaceState({}, document.title, REDIRECT_URI);
-      try {
-        const user = await fetchDiscordUser(token);
-        loginBtn.classList.add("d-none");
-        registerBtn.classList.remove("d-none");
-        logoutBtn.classList.remove("d-none");
-
-        document.getElementById("nomeMedico").value = `@[UPA] C. Enfer. ${user.username} | ${user.discriminator}`;
-        document.getElementById("medicoId").value = user.id;
-
-        userInfo.innerHTML = `
-          <h4>👤 Logado como ${user.username}#${user.discriminator}</h4>
-          <p>ID: ${user.id}</p>
-        `;
-      } catch (err) {
-        alert("Erro ao autenticar com o Discord.");
+          // Preenche o nome do médico de forma oculta
+          document.getElementById("nomeMedico").value = `@[UPA] C. Enfer. ${user.username} | ${user.discriminator}`;
+        })
+        .catch(() => {
+          localStorage.removeItem("discord_token");
+        });
+      } else {
+        // Verifica se o token está no URL
+        const hash = window.location.hash;
+        if (hash.includes("access_token")) {
+          const params = new URLSearchParams(hash.substring(1));
+          const accessToken = params.get("access_token");
+          localStorage.setItem("discord_token", accessToken);
+          window.location.hash = "";
+          location.reload();
+        }
       }
-    };
+    }
 
-    loginBtn.addEventListener("click", () => {
-      const oauthURL = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${SCOPE}`;
-      window.location.href = oauthURL;
-    });
-
-    logoutBtn.addEventListener("click", () => {
-      window.location.href = REDIRECT_URI;
-    });
-
-    document.getElementById("relatorioForm").addEventListener("submit", async (e) => {
+    document.getElementById("relatorioForm").addEventListener("submit", function (e) {
       e.preventDefault();
 
       const nomeMedico = document.getElementById("nomeMedico").value;
@@ -155,41 +130,44 @@
       const dia = document.getElementById("dia").value;
 
       const embed = {
-        embeds: [{
-          title: "📋 Relatório de Consulta",
-          color: 0x57F287,
-          fields: [
-            { name: "👨‍⚕️ Nome Médico", value: `<@${idMedico}>`, inline: true },
-            { name: "🆔 ID Médico", value: idMedico, inline: true },
-            { name: "👤 Nome Paciente", value: nomePaciente, inline: true },
-            { name: "🆔 ID Paciente", value: idPaciente, inline: true },
-            { name: "🤕 Sintomas", value: sintomas },
-            { name: "💊 Medicamentos", value: medicamentos },
-            { name: "🕒 Horário", value: horario, inline: true },
-            { name: "📅 Dia", value: dia, inline: true }
-          ],
-          timestamp: new Date().toISOString()
-        }]
+        embeds: [
+          {
+            title: "📋 Novo Relatório de Consulta",
+            color: 0x00ff00,
+            fields: [
+              { name: "👨‍⚕️ Nome Médico", value: nomeMedico, inline: true },
+              { name: "🆔 ID Médico", value: idMedico, inline: true },
+              { name: "👤 Nome Paciente", value: nomePaciente, inline: true },
+              { name: "🆔 ID Paciente", value: idPaciente, inline: true },
+              { name: "🤒 Sintomas", value: sintomas, inline: false },
+              { name: "💊 Medicamentos", value: medicamentos, inline: false },
+              { name: "🕒 Horário", value: horario, inline: true },
+              { name: "📅 Dia", value: dia, inline: true },
+            ],
+            timestamp: new Date().toISOString(),
+          },
+        ],
       };
 
-      const res = await fetch(WEBHOOK_URL, {
+      fetch(webhookURL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(embed)
-      });
-
-      if (res.ok) {
-        alert("Relatório enviado com sucesso!");
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(embed),
+      })
+      .then(() => {
+        alert("✅ Relatório enviado com sucesso!");
         document.getElementById("relatorioForm").reset();
-        const modal = bootstrap.Modal.getInstance(document.getElementById("relatorioModal"));
-        modal.hide();
-      } else {
-        alert("Erro ao enviar relatório.");
-      }
+      })
+      .catch(() => {
+        alert("❌ Ocorreu um erro ao enviar.");
+      });
     });
 
-    init();
+    window.onload = init;
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
