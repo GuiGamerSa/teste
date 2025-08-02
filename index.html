@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>HP - Registo Médico</title>
+  <title>Registo Médico HP</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -67,7 +67,7 @@
     <h2>Registo de Atendimento HP</h2>
     <form id="hpForm">
       <input type="hidden" id="nomeMedico" required />
-      <input type="text" id="idMedico" placeholder="ID do Médico (manual ou igual ao Discord)" required />
+      <input type="text" id="idMedico" placeholder="ID do Médico" required />
       <input type="text" id="nomePaciente" placeholder="Nome do Paciente" required />
       <input type="text" id="idPaciente" placeholder="ID do Paciente" required />
       <textarea id="sintomas" placeholder="Sintomas do Paciente" rows="3" required></textarea>
@@ -79,8 +79,8 @@
   </div>
 
   <script>
-    const CLIENT_ID = "1401008725824770088"; // <-- substitui aqui
-    const REDIRECT_URI = window.location.origin + window.location.pathname;
+    const CLIENT_ID = "1401008725824770088"; // <--- substitui pelo teu
+    const REDIRECT_URI = "https://guigamersa.github.io/teste/";
     const SCOPES = "identify";
 
     const params = new URLSearchParams(window.location.hash.substring(1));
@@ -129,7 +129,7 @@
       const horario = document.getElementById("horario").value;
       const dia = document.getElementById("dia").value;
 
-      const webhookURL = "https://discord.com/api/webhooks/1401004679005081672/5n0r7NEXpMnmYfTLtJWKH0j3RhPHxHzxXbkxlDlfoQXbFopCQUkE_bPO6plocDLZO75F"; // <-- substitui aqui
+      const webhookURL = "https://discord.com/api/webhooks/1401004679005081672/5n0r7NEXpMnmYfTLtJWKH0j3RhPHxHzxXbkxlDlfoQXbFopCQUkE_bPO6plocDLZO75F"; // <--- substitui aqui
 
       const embed = {
         title: "🩺 Registo de Atendimento Médico",
