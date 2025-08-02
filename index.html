@@ -2,11 +2,11 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Formulário de Suporte</title>
+  <title>Registo de Atendimento HP</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      background-color: #f2f2f2;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -15,14 +15,15 @@
 
     .form-container {
       background: white;
-      padding: 20px 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      width: 400px;
+      padding: 25px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      width: 450px;
     }
 
     h2 {
       margin-top: 0;
+      text-align: center;
     }
 
     input, textarea, button {
@@ -30,73 +31,107 @@
       margin: 10px 0;
       padding: 10px;
       border: 1px solid #ccc;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 1em;
     }
 
     button {
-      background-color: #5865F2;
+      background-color: #43B581;
       color: white;
       cursor: pointer;
       border: none;
     }
 
     button:hover {
-      background-color: #4752C4;
+      background-color: #369B6F;
     }
   </style>
 </head>
 <body>
 
   <div class="form-container">
-    <h2>Enviar Pedido de Suporte</h2>
-    <form id="supportForm">
-      <input type="text" id="nome" placeholder="Seu nome" required />
-      <input type="email" id="email" placeholder="Seu email" required />
-      <textarea id="mensagem" placeholder="Descreva o seu problema..." rows="5" required></textarea>
-      <button type="submit">Enviar</button>
+    <h2>Registo de Atendimento HP</h2>
+    <form id="hpForm">
+      <input type="text" id="nomeMedico" placeholder="Nome do Médico (com @ para menção)" required />
+      <input type="text" id="idMedico" placeholder="ID do Médico" required />
+      <input type="text" id="nomePaciente" placeholder="Nome do Paciente" required />
+      <input type="text" id="idPaciente" placeholder="ID do Paciente" required />
+      <textarea id="sintomas" placeholder="Sintomas do Paciente" rows="3" required></textarea>
+      <textarea id="medicamentos" placeholder="Medicamento(s) aplicados" rows="2" required></textarea>
+      <input type="text" id="horario" placeholder="Horário (ex: 21:52)" required />
+      <input type="text" id="dia" placeholder="Dia (ex: 01/08)" required />
+      <button type="submit">Enviar Registo</button>
     </form>
   </div>
 
   <script>
-    document.getElementById("supportForm").addEventListener("submit", function(e) {
+    document.getElementById("hpForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
-      const nome = document.getElementById("nome").value;
-      const email = document.getElementById("email").value;
-      const mensagem = document.getElementById("mensagem").value;
+      const nomeMedico = document.getElementById("nomeMedico").value;
+      const idMedico = document.getElementById("idMedico").value;
+      const nomePaciente = document.getElementById("nomePaciente").value;
+      const idPaciente = document.getElementById("idPaciente").value;
+      const sintomas = document.getElementById("sintomas").value;
+      const medicamentos = document.getElementById("medicamentos").value;
+      const horario = document.getElementById("horario").value;
+      const dia = document.getElementById("dia").value;
 
       const webhookURL = "https://discord.com/api/webhooks/1401004679005081672/5n0r7NEXpMnmYfTLtJWKH0j3RhPHxHzxXbkxlDlfoQXbFopCQUkE_bPO6plocDLZO75F";
 
-      const data = {
-        username: "Site Suporte",
-        avatar_url: "https://i.imgur.com/4M34hi2.png", // opcional
-        embeds: [
+      const embed = {
+        title: "🩺 Registo de Atendimento Médico",
+        color: 3066993, // verde
+        fields: [
           {
-            title: "📩 Novo Pedido de Suporte",
-            color: 3447003, // azul
-            fields: [
-              {
-                name: "👤 Nome",
-                value: nome,
-                inline: true
-              },
-              {
-                name: "📧 Email",
-                value: email,
-                inline: true
-              },
-              {
-                name: "📝 Mensagem",
-                value: mensagem
-              }
-            ],
-            footer: {
-              text: "Enviado via Website",
-            },
-            timestamp: new Date().toISOString()
+            name: "👨‍⚕️ Nome Médico",
+            value: nomeMedico,
+            inline: true
+          },
+          {
+            name: "🆔 ID Médico",
+            value: idMedico,
+            inline: true
+          },
+          {
+            name: "🧑 Nome Paciente",
+            value: nomePaciente,
+            inline: true
+          },
+          {
+            name: "🆔 ID Paciente",
+            value: idPaciente,
+            inline: true
+          },
+          {
+            name: "🤕 Sintomas",
+            value: sintomas
+          },
+          {
+            name: "💊 Medicamento(s)",
+            value: medicamentos
+          },
+          {
+            name: "🕓 Horário",
+            value: horario,
+            inline: true
+          },
+          {
+            name: "📅 Dia",
+            value: dia,
+            inline: true
           }
-        ]
+        ],
+        footer: {
+          text: "Sistema de Hospital • HP",
+        },
+        timestamp: new Date().toISOString()
+      };
+
+      const payload = {
+        username: "Registo HP",
+        avatar_url: "https://i.imgur.com/4M34hi2.png", // opcional
+        embeds: [embed]
       };
 
       fetch(webhookURL, {
@@ -104,14 +139,14 @@
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(payload)
       })
       .then(res => {
         if (res.ok) {
-          alert("Pedido enviado com sucesso!");
-          document.getElementById("supportForm").reset();
+          alert("Registo enviado com sucesso!");
+          document.getElementById("hpForm").reset();
         } else {
-          alert("Erro ao enviar pedido.");
+          alert("Erro ao enviar o registo.");
         }
       })
       .catch(err => {
@@ -120,5 +155,6 @@
       });
     });
   </script>
+
 </body>
 </html>
