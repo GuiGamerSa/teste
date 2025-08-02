@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário de Suporte</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #5865F2;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      background-color: #4752C4;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Enviar Pedido de Suporte</h2>
+    <form id="supportForm">
+      <input type="text" id="nome" placeholder="Seu nome" required />
+      <input type="email" id="email" placeholder="Seu email" required />
+      <textarea id="mensagem" placeholder="Descreva o seu problema..." rows="5" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("supportForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value;
+      const email = document.getElementById("email").value;
+      const mensagem = document.getElementById("mensagem").value;
+
+      const webhookURL = "https://discord.com/api/webhooks/1401004679005081672/5n0r7NEXpMnmYfTLtJWKH0j3RhPHxHzxXbkxlDlfoQXbFopCQUkE_bPO6plocDLZO75F";
+
+      const data = {
+        username: "Site Suporte",
+        avatar_url: "https://i.imgur.com/4M34hi2.png", // opcional
+        embeds: [
+          {
+            title: "📩 Novo Pedido de Suporte",
+            color: 3447003, // azul
+            fields: [
+              {
+                name: "👤 Nome",
+                value: nome,
+                inline: true
+              },
+              {
+                name: "📧 Email",
+                value: email,
+                inline: true
+              },
+              {
+                name: "📝 Mensagem",
+                value: mensagem
+              }
+            ],
+            footer: {
+              text: "Enviado via Website",
+            },
+            timestamp: new Date().toISOString()
+          }
+        ]
+      };
+
+      fetch(webhookURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => {
+        if (res.ok) {
+          alert("Pedido enviado com sucesso!");
+          document.getElementById("supportForm").reset();
+        } else {
+          alert("Erro ao enviar pedido.");
+        }
+      })
+      .catch(err => {
+        console.error("Erro:", err);
+        alert("Erro de conexão com o Discord.");
+      });
+    });
+  </script>
+</body>
+</html>
