@@ -2,176 +2,190 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Registo Médico HP</title>
+  <title>Sistema Informático da UPA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+      background-color: #f8f9fa;
+      padding: 2rem;
     }
-
-    .form-container {
-      background: white;
-      padding: 25px 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      width: 450px;
-      display: none;
-    }
-
-    h2 {
-      margin-top: 0;
-      text-align: center;
-    }
-
-    input, textarea, button {
+    iframe {
       width: 100%;
-      margin: 10px 0;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1em;
-    }
-
-    button {
-      background-color: #43B581;
-      color: white;
-      cursor: pointer;
+      height: 600px;
       border: none;
-    }
-
-    button:hover {
-      background-color: #369B6F;
-    }
-
-    #login-btn {
-      background-color: #5865F2;
-      margin-bottom: 20px;
-    }
-
-    #user-info {
-      margin-bottom: 20px;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
+  <div class="container text-center">
+    <h1 class="mb-4">👋 Bem-vindo ao Sistema Informático da UPA</h1>
 
-  <button id="login-btn">Login com Discord</button>
-  <div id="user-info"></div>
+    <div id="userInfo" class="mb-3"></div>
 
-  <div class="form-container" id="form-container">
-    <h2>Registo de Atendimento HP</h2>
-    <form id="hpForm">
-      <input type="hidden" id="nomeMedico" required />
-      <input type="text" id="idMedico" placeholder="ID do Médico" required />
-      <input type="text" id="nomePaciente" placeholder="Nome do Paciente" required />
-      <input type="text" id="idPaciente" placeholder="ID do Paciente" required />
-      <textarea id="sintomas" placeholder="Sintomas do Paciente" rows="3" required></textarea>
-      <textarea id="medicamentos" placeholder="Medicamento(s) aplicados" rows="2" required></textarea>
-      <input type="text" id="horario" placeholder="Horário (ex: 21:52)" required />
-      <input type="text" id="dia" placeholder="Dia (ex: 01/08)" required />
-      <button type="submit">Enviar Registo</button>
-    </form>
+    <button id="loginBtn" class="btn btn-primary">Login com Discord</button>
+    <button id="registerBtn" class="btn btn-success d-none" data-bs-toggle="modal" data-bs-target="#relatorioModal">Registrar Relatório de Consulta</button>
+    <button id="logoutBtn" class="btn btn-danger d-none">Logout</button>
+
+    <!-- Google Sheets -->
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRmq6bl99xb_YqME4AzXW9ASRpC3Qz3hTn4x5Sv4SyoI-OUlGgHC9V8DsC6VnbOe8fLhNgAbv0kvo9M/pubhtml?gid=1539016408&single=true&widget=true&headers=false"></iframe>
   </div>
 
+  <!-- Modal Relatório -->
+  <div class="modal fade" id="relatorioModal" tabindex="-1" aria-labelledby="relatorioModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="relatorioForm" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="relatorioModalLabel">Registrar Relatório</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-start">
+          <div class="mb-2">
+            <label>Nome do Paciente</label>
+            <input type="text" class="form-control" id="pacienteNome" required>
+          </div>
+          <div class="mb-2">
+            <label>ID do Paciente</label>
+            <input type="text" class="form-control" id="pacienteId" required>
+          </div>
+          <div class="mb-2">
+            <label>Sintomas</label>
+            <textarea class="form-control" id="sintomas" required></textarea>
+          </div>
+          <div class="mb-2">
+            <label>Medicamentos</label>
+            <textarea class="form-control" id="medicamentos" required></textarea>
+          </div>
+          <div class="mb-2">
+            <label>Horário</label>
+            <input type="text" class="form-control" id="horario" required>
+          </div>
+          <div class="mb-2">
+            <label>Data</label>
+            <input type="text" class="form-control" id="data" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
   <script>
-    const CLIENT_ID = "1401008725824770088"; // <--- substitui pelo teu
+    const CLIENT_ID = "1401008725824770088";
     const REDIRECT_URI = "https://guigamersa.github.io/teste/";
-    const SCOPES = "identify";
+    const API_ENDPOINT = "https://discord.com/api/users/@me";
+    const SCOPE = "identify";
+    const WEBHOOK_URL = "https://discord.com/api/webhooks/1401004679005081672/5n0r7NEXpMnmYfTLtJWKH0j3RhPHxHzxXbkxlDlfoQXbFopCQUkE_bPO6plocDLZO75F"; // ← substitui aqui
 
-    const params = new URLSearchParams(window.location.hash.substring(1));
-    const accessToken = params.get("access_token");
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const registerBtn = document.getElementById("registerBtn");
+    const userInfo = document.getElementById("userInfo");
 
-    const loginBtn = document.getElementById("login-btn");
-    const userInfo = document.getElementById("user-info");
-    const formContainer = document.getElementById("form-container");
+    let userData = null;
 
-    if (!accessToken) {
-      loginBtn.onclick = () => {
-        window.location.href = `https://discord.com/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${SCOPES}`;
-      };
-    } else {
-      // Autenticado
-      loginBtn.style.display = "none";
-
-      fetch("https://discord.com/api/users/@me", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      })
-      .then(res => res.json())
-      .then(user => {
-        const mention = `<@${user.id}>`;
-        const tag = `${user.username}#${user.discriminator}`;
-        document.getElementById("nomeMedico").value = mention;
-        userInfo.innerHTML = `👤 Logado como <strong>${tag}</strong>`;
-        formContainer.style.display = "block";
-      })
-      .catch(err => {
-        console.error("Erro na autenticação:", err);
-        userInfo.textContent = "Erro ao obter dados do utilizador.";
-      });
+    function getAccessTokenFromUrl() {
+      const hash = window.location.hash;
+      if (!hash) return null;
+      const params = new URLSearchParams(hash.substring(1));
+      return params.get("access_token");
     }
 
-    document.getElementById("hpForm").addEventListener("submit", function(e) {
+    async function fetchDiscordUser(token) {
+      const response = await fetch(API_ENDPOINT, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!response.ok) throw new Error("Erro ao obter dados do Discord");
+      return await response.json();
+    }
+
+    async function handleLogin() {
+      const token = getAccessTokenFromUrl();
+      if (!token) return;
+
+      window.history.replaceState({}, document.title, REDIRECT_URI);
+      try {
+        const user = await fetchDiscordUser(token);
+        userData = user;
+
+        loginBtn.classList.add("d-none");
+        registerBtn.classList.remove("d-none");
+        logoutBtn.classList.remove("d-none");
+
+        userInfo.innerHTML = `
+          <h4>👤 Logado como ${user.username}#${user.discriminator}</h4>
+          <p>ID: ${user.id}</p>
+        `;
+      } catch (e) {
+        console.error(e);
+        alert("Falha ao autenticar com o Discord.");
+      }
+    }
+
+    loginBtn.addEventListener("click", () => {
+      const url = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${SCOPE}`;
+      window.location.href = url;
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      window.location.href = REDIRECT_URI;
+    });
+
+    document.getElementById("relatorioForm").addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const nomeMedico = document.getElementById("nomeMedico").value;
-      const idMedico = document.getElementById("idMedico").value;
-      const nomePaciente = document.getElementById("nomePaciente").value;
-      const idPaciente = document.getElementById("idPaciente").value;
+      const pacienteNome = document.getElementById("pacienteNome").value;
+      const pacienteId = document.getElementById("pacienteId").value;
       const sintomas = document.getElementById("sintomas").value;
       const medicamentos = document.getElementById("medicamentos").value;
       const horario = document.getElementById("horario").value;
-      const dia = document.getElementById("dia").value;
-
-      const webhookURL = "https://discord.com/api/webhooks/1401004679005081672/5n0r7NEXpMnmYfTLtJWKH0j3RhPHxHzxXbkxlDlfoQXbFopCQUkE_bPO6plocDLZO75F"; // <--- substitui aqui
+      const data = document.getElementById("data").value;
 
       const embed = {
-        title: "🩺 Registo de Atendimento Médico",
-        color: 3066993,
+        title: "📋 Relatório Médico",
+        color: 0x00b0f4,
         fields: [
-          { name: "👨‍⚕️ Médico", value: nomeMedico, inline: true },
-          { name: "🆔 ID Médico", value: idMedico, inline: true },
-          { name: "🧑 Paciente", value: nomePaciente, inline: true },
-          { name: "🆔 ID Paciente", value: idPaciente, inline: true },
-          { name: "🤕 Sintomas", value: sintomas },
-          { name: "💊 Medicamento(s)", value: medicamentos },
+          { name: "👨‍⚕️ Nome Médico", value: `<@${userData.id}> | ${userData.id}`, inline: false },
+          { name: "🆔 ID Médico", value: `${userData.id}`, inline: true },
+          { name: "👤 Nome Paciente", value: pacienteNome, inline: false },
+          { name: "🆔 ID Paciente", value: pacienteId, inline: true },
+          { name: "🤒 Sintomas", value: sintomas, inline: false },
+          { name: "💊 Medicamentos", value: medicamentos, inline: false },
           { name: "🕓 Horário", value: horario, inline: true },
-          { name: "📅 Dia", value: dia, inline: true }
+          { name: "📅 Dia", value: data, inline: true },
         ],
-        footer: { text: "Sistema de Hospital • HP" },
+        footer: {
+          text: "Sistema UPA",
+        },
         timestamp: new Date().toISOString()
       };
 
-      const payload = {
-        username: "Registo HP",
-        embeds: [embed]
-      };
-
-      fetch(webhookURL, {
+      fetch(WEBHOOK_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      })
-      .then(res => {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ embeds: [embed] })
+      }).then(res => {
         if (res.ok) {
-          alert("Registo enviado com sucesso!");
-          document.getElementById("hpForm").reset();
+          alert("✅ Relatório enviado com sucesso!");
+          document.getElementById("relatorioForm").reset();
+          bootstrap.Modal.getInstance(document.getElementById('relatorioModal')).hide();
         } else {
-          alert("Erro ao enviar o registo.");
+          alert("❌ Erro ao enviar o relatório.");
         }
-      })
-      .catch(err => {
-        console.error("Erro:", err);
-        alert("Erro de conexão com o Discord.");
       });
     });
-  </script>
 
+    handleLogin();
+  </script>
 </body>
 </html>
