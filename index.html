@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>UPA - Sistema Informático Hospitalar</title>
+  <title>Sistema Informático da UPA</title>
+  <link rel="icon" type="image/png" href="upa.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -77,15 +78,6 @@
       color: white;
     }
 
-    .btn-logout {
-      background: linear-gradient(45deg, var(--danger-color), #dc2626);
-      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-    }
-
-    .btn-logout:hover {
-      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
-    }
-
     .hero-section {
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(20px);
@@ -130,11 +122,19 @@
       text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.2);
       transition: all 0.3s ease;
+      cursor: pointer;
+      color: white;
     }
 
     .stat-card:hover {
       transform: translateY(-5px);
       background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    button.stat-card:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
     }
 
     .stat-icon {
@@ -154,26 +154,78 @@
       font-size: 0.9rem;
     }
 
-    .form-card {
+    .iframe-container {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
       border-radius: var(--border-radius);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 1rem;
+      margin: 2rem 0;
       box-shadow: var(--card-shadow);
-      margin: 2rem auto;
-      max-width: 700px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
-    .form-card .card-header {
+    .iframe-container iframe {
+      border-radius: 8px;
+      border: none;
+      width: 100%;
+      height: 600px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--accent-color);
+    }
+
+    .alert-custom {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: var(--border-radius);
+      border: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Modal Styles */
+    .modal-content {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      border: none;
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+    }
+
+    .modal-header {
       background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
       color: white;
-      border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
-      padding: 1.5rem;
-      text-align: center;
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      border: none;
     }
 
-    .form-card .card-body {
-      padding: 2rem;
+    .modal-title i {
+      margin-right: 10px;
     }
 
     .form-label {
@@ -219,65 +271,34 @@
       color: white;
     }
 
-    .iframe-container {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      border-radius: var(--border-radius);
-      padding: 1rem;
-      margin: 2rem 0;
-      box-shadow: var(--card-shadow);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .iframe-container iframe {
-      border-radius: 8px;
+    .btn-copy {
+      background: linear-gradient(45deg, var(--warning-color), #d97706);
       border: none;
-      width: 100%;
-      height: 600px;
-    }
-
-    .loading-spinner {
-      display: none;
-      text-align: center;
+      border-radius: 50px;
+      padding: 15px 30px;
       color: white;
-      padding: 2rem;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin: 3rem 0;
-    }
-
-    .feature-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: var(--border-radius);
-      padding: 2rem;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
     }
 
-    .feature-card:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 255, 255, 0.15);
+    .btn-copy:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+      color: white;
     }
 
-    .feature-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      color: var(--accent-color);
-    }
-
-    .alert-custom {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(10px);
-      border-radius: var(--border-radius);
-      border: none;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    .preview-area {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      border-left: 4px solid var(--accent-color);
+      font-family: monospace;
+      white-space: pre-wrap;
+      max-height: 400px;
+      overflow-y: auto;
     }
 
     @media (max-width: 768px) {
@@ -321,19 +342,9 @@
       <i class="fas fa-hospital"></i>
       UPA - Sistema Hospitalar
     </a>
-    <div class="ms-auto">
-      <button id="loginBtn" class="btn btn-custom">
-        <i class="fab fa-discord me-2"></i>
-        Login Discord
-      </button>
-      <button id="logoutBtn" class="btn btn-logout d-none">
-        <i class="fas fa-sign-out-alt me-2"></i>
-        Logout
-      </button>
-    </div>
   </nav>
 
-  <!-- Seção Principal (Antes do Login) -->
+  <!-- Seção Principal -->
   <div id="mainContent" class="container">
     <div class="hero-section fade-in">
       <h1 class="hero-title">
@@ -345,43 +356,20 @@
       </p>
       
       <div class="stats-grid">
-        <div class="stat-card">
-          <i class="fas fa-user-md stat-icon text-info"></i>
-          <div class="stat-number">24/7</div>
-          <div class="stat-label">Atendimento Médico</div>
-        </div>
-        <div class="stat-card">
+        <button id="novoRelatorioCard" class="stat-card" type="button">
           <i class="fas fa-clipboard-list stat-icon text-success"></i>
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Relatórios Digitais</div>
-        </div>
-        <div class="stat-card">
-          <i class="fas fa-shield-alt stat-icon text-warning"></i>
-          <div class="stat-number">Seguro</div>
-          <div class="stat-label">Sistema Protegido</div>
-        </div>
-      </div>
-
-      <div class="feature-grid">
-        <div class="feature-card">
-          <i class="fas fa-stethoscope feature-icon"></i>
-          <h4>Consultas Médicas</h4>
-          <p>Registo completo de consultas com sintomas e medicamentos prescritos</p>
-        </div>
-        <div class="feature-card">
-          <i class="fas fa-chart-line feature-icon"></i>
-          <h4>Relatórios em Tempo Real</h4>
-          <p>Visualização instantânea de dados médicos através de dashboards</p>
-        </div>
-        <div class="feature-card">
-          <i class="fas fa-users feature-icon"></i>
-          <h4>Equipa Médica</h4>
-          <p>Sistema de autenticação seguro para profissionais de saúde</p>
-        </div>
+          <div class="stat-number">Novo</div>
+          <div class="stat-label">Relatório de Consulta</div>
+        </button>
+        <button id="exameCard" class="stat-card" type="button">
+          <i class="fas fa-brain stat-icon text-info"></i>
+          <div class="stat-number">Solicitação</div>
+          <div class="stat-label">Exame Psicotécnico</div>
+        </button>
       </div>
     </div>
 
-    <!-- Dashboard de Dados (Sempre Visível) -->
+    <!-- Dashboard de Dados -->
     <div class="iframe-container fade-in">
       <div class="d-flex align-items-center mb-3">
         <i class="fas fa-chart-bar text-primary me-2"></i>
@@ -394,121 +382,253 @@
     </div>
   </div>
 
-  <!-- Formulário de Consulta (Após Login) -->
-  <div id="formContainer" class="container d-none">
-    <div class="form-card fade-in">
-      <div class="card-header">
-        <h3 class="mb-0">
-          <i class="fas fa-clipboard-list me-2"></i>
-          Registrar Relatório de Consulta
-        </h3>
-        <p class="mb-0 mt-2 opacity-75">Preencha todos os campos para registrar a consulta médica</p>
-      </div>
-      <div class="card-body">
-        <form id="relatorioForm">
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="medicoId" class="form-label">
-                <i class="fas fa-id-badge"></i>
-                ID Médico
-              </label>
-              <input type="text" class="form-control" id="medicoId" placeholder="ID do Médico" required />
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="idPaciente" class="form-label">
-                <i class="fas fa-user"></i>
-                ID Paciente
-              </label>
-              <input type="number" class="form-control" id="idPaciente" placeholder="ID do paciente" required />
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="nomePaciente" class="form-label">
-              <i class="fas fa-user-circle"></i>
-              Nome do Paciente
-            </label>
-            <input type="text" class="form-control" id="nomePaciente" placeholder="Nome completo do paciente" required />
-          </div>
-
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="dia" class="form-label">
-                <i class="fas fa-calendar-alt"></i>
-                Data da Consulta
-              </label>
-              <input type="date" class="form-control" id="dia" required />
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="horario" class="form-label">
-                <i class="fas fa-clock"></i>
-                Horário da Consulta
-              </label>
-              <input type="time" class="form-control" id="horario" required />
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="sintomas" class="form-label">
-              <i class="fas fa-thermometer-half"></i>
-              Sintomas Apresentados
-            </label>
-            <textarea class="form-control" id="sintomas" rows="3" 
-                      placeholder="Descreva os sintomas apresentados pelo paciente..." required></textarea>
-          </div>
-
-          <div class="mb-4">
-            <label for="medicamentos" class="form-label">
-              <i class="fas fa-pills"></i>
-              Medicamentos Prescritos
-            </label>
-            <textarea class="form-control" id="medicamentos" rows="3" 
-                      placeholder="Liste os medicamentos prescritos e dosagens..." required></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-submit w-100 pulse-animation">
-            <i class="fas fa-paper-plane me-2"></i>
-            Enviar Relatório de Consulta
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Informações Adicionais para Médicos -->
-    <div class="hero-section mt-4">
-      <h3 class="mb-3">
-        <i class="fas fa-info-circle text-info me-2"></i>
-        Informações Importantes
-      </h3>
-      <div class="row text-start">
-        <div class="col-md-6">
-          <h5><i class="fas fa-check-circle text-success me-2"></i>Procedimentos</h5>
-          <ul class="opacity-75">
-            <li>Preencha todos os campos obrigatórios</li>
-            <li>Seja específico na descrição dos sintomas</li>
-            <li>Indique dosagens exatas dos medicamentos</li>
-            <li>Verifique data e horário antes de enviar</li>
-          </ul>
+  <!-- Modal do Formulário de Exame Psicotécnico -->
+  <div class="modal fade" id="exameModal" tabindex="-1" aria-labelledby="exameModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exameModalLabel">
+            <i class="fas fa-brain"></i>
+            Solicitação de Exame Psicotécnico
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="col-md-6">
-          <h5><i class="fas fa-shield-alt text-warning me-2"></i>Segurança</h5>
-          <ul class="opacity-75">
-            <li>Apenas médicos autenticados podem aceder</li>
-            <li>Dados protegidos por encriptação</li>
-            <li>Conformidade com RGPD</li>
-            <li>Backup automático de relatórios</li>
-          </ul>
+        <div class="modal-body">
+          <form id="exameForm">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="exameMedicoNome" class="form-label">
+                  <i class="fas fa-user-md"></i>
+                  Nome do Médico
+                </label>
+                <input type="text" class="form-control" id="exameMedicoNome" placeholder="Nome do médico" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="exameMedicoId" class="form-label">
+                  <i class="fas fa-id-badge"></i>
+                  ID Médico
+                </label>
+                <input type="text" class="form-control" id="exameMedicoId" placeholder="ID do Médico" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="pacienteId" class="form-label">
+                  <i class="fas fa-hashtag"></i>
+                  ID do Paciente
+                </label>
+                <input type="number" class="form-control" id="pacienteId" placeholder="ID do paciente" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="nomeCompleto" class="form-label">
+                  <i class="fas fa-user-circle"></i>
+                  Nome Completo
+                </label>
+                <input type="text" class="form-control" id="nomeCompleto" placeholder="Nome completo do paciente" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="idade" class="form-label">
+                  <i class="fas fa-birthday-cake"></i>
+                  Idade
+                </label>
+                <input type="number" class="form-control" id="idade" placeholder="Idade" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="telefone" class="form-label">
+                  <i class="fas fa-phone"></i>
+                  Telefone
+                </label>
+                <input type="tel" class="form-control" id="telefone" placeholder="(00) 00000-0000" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="estadoCivil" class="form-label">
+                  <i class="fas fa-heart"></i>
+                  Estado Civil
+                </label>
+                <select class="form-select" id="estadoCivil" required>
+                  <option value="">Selecione</option>
+                  <option value="Solteiro(a)">Solteiro(a)</option>
+                  <option value="Casado(a)">Casado(a)</option>
+                  <option value="Divorciado(a)">Divorciado(a)</option>
+                  <option value="Viúvo(a)">Viúvo(a)</option>
+                  <option value="União Estável">União Estável</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="trabalho" class="form-label">
+                  <i class="fas fa-briefcase"></i>
+                  Trabalho
+                </label>
+                <input type="text" class="form-control" id="trabalho" placeholder="Local de trabalho" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cargo" class="form-label">
+                  <i class="fas fa-user-tie"></i>
+                  Cargo
+                </label>
+                <input type="text" class="form-control" id="cargo" placeholder="Cargo/Função" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="residencia" class="form-label">
+                  <i class="fas fa-home"></i>
+                  Residência
+                </label>
+                <input type="text" class="form-control" id="residencia" placeholder="Endereço de residência" required />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="situacaoExame" class="form-label">
+                <i class="fas fa-money-bill-wave"></i>
+                Situação do Exame
+              </label>
+              <select class="form-select" id="situacaoExame" required>
+                <option value="">Selecione</option>
+                <option value="pago">Pago</option>
+                <option value="não pago">Não Pago</option>
+              </select>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-submit flex-fill">
+                <i class="fas fa-eye me-2"></i>
+                Gerar Solicitação
+              </button>
+              <button type="button" id="copyExameBtn" class="btn btn-copy flex-fill" style="display: none;">
+                <i class="fas fa-copy me-2"></i>
+                Copiar para Clipboard
+              </button>
+            </div>
+          </form>
+
+          <!-- Área de Preview -->
+          <div id="previewExameContainer" style="display: none;">
+            <h6 class="mt-4 mb-2">
+              <i class="fas fa-file-alt text-primary me-2"></i>
+              Pré-visualização da Solicitação:
+            </h6>
+            <div class="preview-area" id="previewExameArea"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Loading Spinner -->
-  <div id="loadingSpinner" class="loading-spinner">
-    <div class="spinner-border text-light" role="status">
-      <span class="visually-hidden">Carregando...</span>
+  <!-- Modal do Formulário de Relatório -->
+  <div class="modal fade" id="relatorioModal" tabindex="-1" aria-labelledby="relatorioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="relatorioModalLabel">
+            <i class="fas fa-clipboard-list"></i>
+            Registrar Relatório de Consulta
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="relatorioForm">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="medicoNome" class="form-label">
+                  <i class="fas fa-user-md"></i>
+                  Nome do Médico
+                </label>
+                <input type="text" class="form-control" id="medicoNome" placeholder="Nome do médico" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="medicoId" class="form-label">
+                  <i class="fas fa-id-badge"></i>
+                  ID Médico
+                </label>
+                <input type="text" class="form-control" id="medicoId" placeholder="ID do Médico" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nomePaciente" class="form-label">
+                  <i class="fas fa-user-circle"></i>
+                  Nome do Paciente
+                </label>
+                <input type="text" class="form-control" id="nomePaciente" placeholder="Nome completo do paciente" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="idPaciente" class="form-label">
+                  <i class="fas fa-user"></i>
+                  ID Paciente
+                </label>
+                <input type="number" class="form-control" id="idPaciente" placeholder="ID do paciente" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="dia" class="form-label">
+                  <i class="fas fa-calendar-alt"></i>
+                  Data da Consulta
+                </label>
+                <input type="date" class="form-control" id="dia" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="horario" class="form-label">
+                  <i class="fas fa-clock"></i>
+                  Horário da Consulta
+                </label>
+                <input type="time" class="form-control" id="horario" required />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="sintomas" class="form-label">
+                <i class="fas fa-thermometer-half"></i>
+                Sintomas Apresentados
+              </label>
+              <textarea class="form-control" id="sintomas" rows="3" 
+                        placeholder="Descreva os sintomas apresentados pelo paciente..." required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="medicamentos" class="form-label">
+                <i class="fas fa-pills"></i>
+                Medicamentos Prescritos
+              </label>
+              <textarea class="form-control" id="medicamentos" rows="3" 
+                        placeholder="Liste os medicamentos prescritos e dosagens..." required></textarea>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-submit flex-fill">
+                <i class="fas fa-eye me-2"></i>
+                Gerar Relatório
+              </button>
+              <button type="button" id="copyBtn" class="btn btn-copy flex-fill" style="display: none;">
+                <i class="fas fa-copy me-2"></i>
+                Copiar para Clipboard
+              </button>
+            </div>
+          </form>
+
+          <!-- Área de Preview -->
+          <div id="previewContainer" style="display: none;">
+            <h6 class="mt-4 mb-2">
+              <i class="fas fa-file-alt text-primary me-2"></i>
+              Pré-visualização do Relatório:
+            </h6>
+            <div class="preview-area" id="previewArea"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p class="mt-2">Autenticando...</p>
   </div>
 
   <!-- Footer -->
@@ -523,14 +643,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Configurações - substitua pelos seus dados
-  const clientId = '1401008725824770088'; 
-  const redirectUri = window.location.origin + window.location.pathname;
-  const webhookURL = 'https://discord.com/api/webhooks/1401004679005081672/5n0r7NEXpMnmYfTLtJWKH0j3RhPHxHzxXbkxlDlfoQXbFopCQUkE_bPO6plocDLZO75F';
+  let generatedReport = '';
+  let generatedExame = '';
 
-  let discordUserId = null;
-
-  // Auto-fill da data atual
+  // Auto-fill da data atual e carregar dados salvos
   document.addEventListener('DOMContentLoaded', function() {
     const today = new Date();
     const dateString = today.toISOString().split('T')[0];
@@ -538,24 +654,64 @@
     
     document.getElementById('dia').value = dateString;
     document.getElementById('horario').value = timeString;
-  });
-
-  // Login Discord - inicia OAuth2
-  document.getElementById("loginBtn").addEventListener("click", () => {
-    document.getElementById("loadingSpinner").style.display = "block";
     
-    setTimeout(() => {
-      const url = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=token&scope=identify`;
-      window.location.href = url;
-    }, 1000);
+    // Carregar dados salvos do médico
+    loadMedicoData();
   });
 
-  // Logout
-  document.getElementById("logoutBtn").addEventListener("click", () => {
-    if (confirm("Tem certeza que deseja fazer logout?")) {
-      localStorage.removeItem("discord_token");
-      location.reload();
+  // Salvar dados do médico no localStorage
+  function saveMedicoData() {
+    const medicoNome = document.getElementById('medicoNome') ? document.getElementById('medicoNome').value.trim() : '';
+    const medicoId = document.getElementById('medicoId') ? document.getElementById('medicoId').value.trim() : '';
+    
+    const exameMedicoNome = document.getElementById('exameMedicoNome') ? document.getElementById('exameMedicoNome').value.trim() : '';
+    const exameMedicoId = document.getElementById('exameMedicoId') ? document.getElementById('exameMedicoId').value.trim() : '';
+    
+    const nome = medicoNome || exameMedicoNome;
+    const id = medicoId || exameMedicoId;
+    
+    if (nome) {
+      localStorage.setItem('upa_medico_nome', nome);
     }
+    if (id) {
+      localStorage.setItem('upa_medico_id', id);
+    }
+  }
+
+  // Carregar dados salvos do médico
+  function loadMedicoData() {
+    const savedNome = localStorage.getItem('upa_medico_nome');
+    const savedId = localStorage.getItem('upa_medico_id');
+    
+    if (savedNome) {
+      if (document.getElementById('medicoNome')) {
+        document.getElementById('medicoNome').value = savedNome;
+      }
+      if (document.getElementById('exameMedicoNome')) {
+        document.getElementById('exameMedicoNome').value = savedNome;
+      }
+    }
+    if (savedId) {
+      if (document.getElementById('medicoId')) {
+        document.getElementById('medicoId').value = savedId;
+      }
+      if (document.getElementById('exameMedicoId')) {
+        document.getElementById('exameMedicoId').value = savedId;
+      }
+    }
+  }
+
+  // Abrir modais
+  document.getElementById("novoRelatorioCard").addEventListener("click", () => {
+    const modal = new bootstrap.Modal(document.getElementById('relatorioModal'));
+    modal.show();
+    setTimeout(() => loadMedicoData(), 100);
+  });
+
+  document.getElementById("exameCard").addEventListener("click", () => {
+    const modal = new bootstrap.Modal(document.getElementById('exameModal'));
+    modal.show();
+    setTimeout(() => loadMedicoData(), 100);
   });
 
   function showAlert(message, type = 'success') {
@@ -578,74 +734,14 @@
     }, 5000);
   }
 
-  function init() {
-    const token = localStorage.getItem("discord_token");
-    if (token) {
-      document.getElementById("loadingSpinner").style.display = "block";
-      
-      fetch("https://discord.com/api/users/@me", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(res => {
-        if (!res.ok) throw new Error("Token inválido");
-        return res.json();
-      })
-      .then(user => {
-        discordUserId = user.id;
-        
-        // Mostrar form e esconder login
-        document.getElementById("loginBtn").classList.add("d-none");
-        document.getElementById("logoutBtn").classList.remove("d-none");
-        document.getElementById("formContainer").classList.remove("d-none");
-        document.getElementById("mainContent").classList.add("d-none");
-        document.getElementById("loadingSpinner").style.display = "none";
-        
-        // Atualizar navbar brand
-        document.querySelector(".navbar-brand").innerHTML = `
-          <i class="fas fa-user-md"></i>
-          Dr. ${user.username} - Sistema UPA
-        `;
-        
-        showAlert(`Bem-vindo, Dr. ${user.username}! Sistema autenticado com sucesso.`);
-      })
-      .catch(() => {
-        localStorage.removeItem("discord_token");
-        document.getElementById("loadingSpinner").style.display = "none";
-        showAlert("Erro na autenticação. Tente novamente.", 'danger');
-      });
-    } else {
-      // Tenta extrair token do hash da URL (OAuth2 Implicit Grant)
-      const hash = window.location.hash;
-      if (hash.includes("access_token")) {
-        document.getElementById("loadingSpinner").style.display = "block";
-        
-        const params = new URLSearchParams(hash.substring(1));
-        const accessToken = params.get("access_token");
-        localStorage.setItem("discord_token", accessToken);
-        window.location.hash = "";
-        location.reload();
-      }
-    }
-  }
-
-  // Envio do formulário
+  // Geração do relatório
   document.getElementById("relatorioForm").addEventListener("submit", e => {
     e.preventDefault();
 
-    if (!discordUserId) {
-      showAlert("⚠️ Precisas estar autenticado para enviar o relatório.", 'warning');
-      return;
-    }
+    // Salvar dados do médico antes de gerar relatório
+    saveMedicoData();
 
-    const submitBtn = document.querySelector('.btn-submit');
-    const originalText = submitBtn.innerHTML;
-    
-    // Loading state
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Enviando...';
-    submitBtn.disabled = true;
-
+    const medicoNome = document.getElementById("medicoNome").value.trim();
     const idMedico = document.getElementById("medicoId").value.trim();
     const nomePaciente = document.getElementById("nomePaciente").value.trim();
     const idPaciente = document.getElementById("idPaciente").value.trim();
@@ -654,69 +750,137 @@
     const horario = document.getElementById("horario").value.trim();
     const dia = document.getElementById("dia").value.trim();
 
-    const embed = {
-      embeds: [{
-        title: "🏥 Novo Relatório de Consulta Médica",
-        color: 0x10b981,
-        fields: [
-          // Médico e ID Médico alinhados
-          { name: "👨‍⚕️ Médico Responsável", value: `<@${discordUserId}>`, inline: true },
-          { name: "🆔 ID Médico", value: `\`${idMedico}\``, inline: true },
-          { name: "\u200B", value: "\u200B", inline: true }, // preenche a linha
-          
-          // Paciente e ID Paciente alinhados
-          { name: "👤 Nome do Paciente", value: `**${nomePaciente}**`, inline: true },
-          { name: "🆔 ID Paciente", value: `\`${idPaciente}\``, inline: true },
-          { name: "\u200B", value: "\u200B", inline: true }, // preenche a linha
-        
-          // Sintomas e Medicamentos
-          { name: "🤒 Sintomas Apresentados", value: `\`\`\`${sintomas}\`\`\``, inline: false },
-          { name: "💊 Medicamentos Prescritos", value: `\`\`\`${medicamentos}\`\`\``, inline: false },
-        
-          // Horário e Dia alinhados
-          { name: "🕒 Horário da Consulta", value: `**${horario}**`, inline: true },
-          { name: "📅 Data da Consulta", value: `**${dia}**`, inline: true },
-          { name: "\u200B", value: "\u200B", inline: true } // preenche a linha
-        ],
-        footer: {
-          text: "Sistema UPA - Registrado automaticamente",
-          icon_url: "https://cdn.discordapp.com/attachments/123456789/hospital-icon.png"
-        },
-        timestamp: new Date().toISOString()
-      }]
-    };
+    // Formatar relatório
+    generatedReport = `
+————————————« :UPA: »————————————
+**Relatório de Consulta Médica**
 
-    fetch(webhookURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(embed),
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Erro no envio');
-      }
+👨‍⚕️ Nome Medico:          🆔 Id Medico:
+**${medicoNome}**     |   **${idMedico}**
+👤 Nome Paciente:        🆔 Id Paciente:
+**${nomePaciente}**   |   **${idPaciente}**
+
+
+🤒 **Sintomas Apresentados**
+
+${sintomas}
+
+💊 **Medicamentos Prescritos**
+
+${medicamentos}
+
+🕒 Data e Hora Atendimento:
+**${dia}**   **${horario}**
+————————————« :UPA: »————————————
+`;
+
+    // Mostrar preview
+    document.getElementById('previewArea').textContent = generatedReport;
+    document.getElementById('previewContainer').style.display = 'block';
+    document.getElementById('copyBtn').style.display = 'block';
+
+    showAlert("✅ Relatório gerado com sucesso! Agora pode copiar para o clipboard.");
+  });
+
+  // Geração da solicitação de exame
+  document.getElementById("exameForm").addEventListener("submit", e => {
+    e.preventDefault();
+
+    // Salvar dados do médico antes de gerar
+    saveMedicoData();
+
+    const medicoNome = document.getElementById("exameMedicoNome").value.trim();
+    const medicoId = document.getElementById("exameMedicoId").value.trim();
+    const pacienteId = document.getElementById("pacienteId").value.trim();
+    const nomeCompleto = document.getElementById("nomeCompleto").value.trim();
+    const idade = document.getElementById("idade").value.trim();
+    const telefone = document.getElementById("telefone").value.trim();
+    const estadoCivil = document.getElementById("estadoCivil").value.trim();
+    const trabalho = document.getElementById("trabalho").value.trim();
+    const cargo = document.getElementById("cargo").value.trim();
+    const residencia = document.getElementById("residencia").value.trim();
+    const situacaoExame = document.getElementById("situacaoExame").value.trim();
+
+    // Formatar solicitação
+    generatedExame = `
+————————————« :UPA: »————————————
+**SOLICITAÇÃO - EXAME PSICOTÉCNICO**
+
+**Nome Médico:** ${medicoNome}
+**ID Médico:** ${medicoId}
+
+**ID:** ${pacienteId}
+**Nome completo:** ${nomeCompleto}
+**Idade:** ${idade}
+**Telefone:** ${telefone}
+**Estado Civil:** ${estadoCivil}
+**Trabalho:** ${trabalho}
+**Cargo:** ${cargo}
+**Residência:** ${residencia}
+**Situação Exame:** ${situacaoExame}
+————————————« :UPA: »————————————
+`;
+
+    // Mostrar preview
+    document.getElementById('previewExameArea').textContent = generatedExame;
+    document.getElementById('previewExameContainer').style.display = 'block';
+    document.getElementById('copyExameBtn').style.display = 'block';
+
+    showAlert("✅ Solicitação gerada com sucesso! Agora pode copiar para o clipboard.");
+  });
+
+  // Copiar exame para clipboard
+  document.getElementById("copyExameBtn").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(generatedExame);
+      showAlert("📋 Solicitação copiada para o clipboard! Pode colar no Discord com Ctrl+V");
       
-      showAlert("✅ Relatório de consulta enviado com sucesso!");
+      const modal = bootstrap.Modal.getInstance(document.getElementById('exameModal'));
+      modal.hide();
+      
+      // Reset form
+      document.getElementById("exameForm").reset();
+      document.getElementById('previewExameContainer').style.display = 'none';
+      document.getElementById('copyExameBtn').style.display = 'none';
+      
+    } catch (error) {
+      console.error('Erro ao copiar:', error);
+      showAlert("❌ Erro ao copiar para clipboard. Tente novamente.", 'danger');
+    }
+  });
+  document.getElementById("copyBtn").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(generatedReport);
+      showAlert("📋 Relatório copiado para o clipboard! Pode colar no Discord com Ctrl+V");
+      
+      // Opcional: fechar modal após copiar
+      const modal = bootstrap.Modal.getInstance(document.getElementById('relatorioModal'));
+      modal.hide();
+      
+      // Reset form
       document.getElementById("relatorioForm").reset();
+      document.getElementById('previewContainer').style.display = 'none';
+      document.getElementById('copyBtn').style.display = 'none';
       
-      // Auto-fill da data e hora novamente
+      // Auto-fill data novamente
       const today = new Date();
       const dateString = today.toISOString().split('T')[0];
       const timeString = today.toTimeString().slice(0, 5);
       
       document.getElementById('dia').value = dateString;
       document.getElementById('horario').value = timeString;
-    })
-    .catch(error => {
-      console.error('Erro:', error);
-      showAlert("❌ Erro ao enviar o relatório. Tente novamente.", 'danger');
-    })
-    .finally(() => {
-      // Reset button
-      submitBtn.innerHTML = originalText;
-      submitBtn.disabled = false;
-    });
+      
+    } catch (error) {
+      console.error('Erro ao copiar:', error);
+      showAlert("❌ Erro ao copiar para clipboard. Tente novamente.", 'danger');
+    }
   });
+
+  // Salvar dados do médico quando os campos mudam
+  document.getElementById('medicoNome').addEventListener('blur', saveMedicoData);
+  document.getElementById('medicoId').addEventListener('blur', saveMedicoData);
+  document.getElementById('exameMedicoNome').addEventListener('blur', saveMedicoData);
+  document.getElementById('exameMedicoId').addEventListener('blur', saveMedicoData);
 
   // Validação em tempo real
   document.querySelectorAll('.form-control, .form-select').forEach(input => {
@@ -731,7 +895,28 @@
     });
   });
 
-  window.onload = init;
-</script>
+  // Reset forms quando modais fecharem
+  document.getElementById('relatorioModal').addEventListener('hidden.bs.modal', function () {
+    document.getElementById("relatorioForm").reset();
+    document.getElementById('previewContainer').style.display = 'none';
+    document.getElementById('copyBtn').style.display = 'none';
+    
+    // Remove validation classes
+    document.querySelectorAll('#relatorioModal .form-control').forEach(input => {
+      input.classList.remove('is-valid', 'is-invalid');
+    });
+  });
 
-</body
+  document.getElementById('exameModal').addEventListener('hidden.bs.modal', function () {
+    document.getElementById("exameForm").reset();
+    document.getElementById('previewExameContainer').style.display = 'none';
+    document.getElementById('copyExameBtn').style.display = 'none';
+    
+    // Remove validation classes
+    document.querySelectorAll('#exameModal .form-control, #exameModal .form-select').forEach(input => {
+      input.classList.remove('is-valid', 'is-invalid');
+    });
+  });
+</script>
+</body>
+</html>
